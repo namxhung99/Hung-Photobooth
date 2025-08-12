@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📸 Hùng's Photobooth - Korean Style</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/frame-layout.css">
+    <link rel="stylesheet" href="css/instructions.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" autoplay loop>
+        <source src="https://tracks.19849efbad7e6c3bf28e7ceab276262d.r2.cloudflarestorage.com/b0d492d1ff8517f6794e973fd83249effc5b3f4d.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=5fb2263a8fe701140f879357076bfbfa%2F20250812%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250812T115145Z&X-Amz-Expires=3600&X-Amz-Signature=9151c468124f9416469dda38df943524e6d64e436fb1e2fc8c6ef54c0477ba09&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3DFun.mp3&x-id=GetObject" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+<body>
+    <div id="app">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="welcome-screen">
+            <div class="welcome-content">
+                <h1 class="welcome-title">- Hùng's Photobooth – 
+                    <br>Chụp ảnh Hàn Quốc lấy ngay online trên Kiosk</h1>
+                <div class="welcome-illustration">
+                    <div class="demo-photo-large">
+                        <img src="https://www.beautyplus.com/_next/static/media/pb-asia.d4b9a792.jpg" alt="Demo Photo" class="demo-img-large">
+                    </div>
+                    <div class="illustration-text">Tạo ảnh đẹp như ảnh Hàn Quốc ngay trên Kiosk Dịch vụ công!</div>
+                    <button id="start-btn" class="start-btn">
+                        <i class="fas fa-camera"></i> Bắt đầu
+                    </button>
+                    <div class="down-arrow-container">
+                        <i class="fas fa-chevron-down bounce-arrow"></i>
+                    </div>
+                </div>
+                
+                <!-- Step-by-step instructions -->
+                <div class="instructions-horizontal">
+                    <h2 class="instructions-title">Cách chụp ảnh</h2>
+                    
+                    <div class="instructions-container">
+                        <div class="instruction-card">
+                            <div class="card-image-placeholder">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="step-number">1</div>
+                                <h3>Chọn filter & chụp ảnh</h3>
+                                <p>Chọn bộ lọc yêu thích và để hệ thống chụp 4 tấm ảnh tự động</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-card">
+                            <div class="card-image-placeholder">
+                                <i class="fas fa-sticky-note"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="step-number">2</div>
+                                <h3>Trang trí ảnh</h3>
+                                <p>Thêm sticker, khung viền và tùy chỉnh theo phong cách Hàn Quốc</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-card">
+                            <div class="card-image-placeholder">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="step-number">3</div>
+                                <h3>Lưu & chia sẻ</h3>
+                                <p>Tải xuống ảnh hoàn chỉnh hoặc chụp lại nếu không hài lòng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Container -->
+        <div id="main-app" class="main-app hidden">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="logo">
+                    <span class="logo-icon">📸</span>
+                    <h1>Hùng's Photobooth</h1>
+                    <span class="subtitle">Korean Style ✨</span>
+                </div>
+                <div class="header-controls">
+                    <button id="settings-btn" class="icon-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Camera Section -->
+                <section id="camera-section" class="camera-section active">
+                    <div class="camera-container">
+                        <div class="camera-frame">
+                            <video id="camera-preview" class="camera-preview" autoplay muted playsinline></video>
+                            <canvas id="camera-canvas" class="camera-canvas hidden"></canvas>
+                            
+                            <!-- Camera Overlay -->
+                            <div class="camera-overlay">
+                                <div id="countdown-display" class="countdown-display hidden">
+                                    <div class="countdown-number">3</div>
+                                    <div class="countdown-text">Get ready! 📸</div>
+                                </div>
+                                
+                                <!-- Template Overlay -->
+                                <div id="template-overlay" class="template-overlay"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Camera Controls -->
+                        <div class="camera-controls">
+                            <button id="switch-camera-btn" class="control-btn secondary">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Switch Camera</span>
+                            </button>
+                            
+                            <button id="capture-btn" class="control-btn primary">
+                                <i class="fas fa-camera"></i>
+                                <span>Take Photo</span>
+                            </button>
+                            
+                            <button id="auto-capture-btn" class="control-btn accent">
+                                <i class="fas fa-clock"></i>
+                                <span>Auto Capture</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Template Selector -->
+                    <div class="template-selector">
+                        <h3>Choose Your Style 🎨</h3>
+                        <div class="template-grid">
+                            <div class="template-item active" data-template="cute">
+                                <div class="template-preview cute-template"></div>
+                                <span>Cute 💕</span>
+                            </div>
+                            <div class="template-item" data-template="retro">
+                                <div class="template-preview retro-template"></div>
+                                <span>Retro 📼</span>
+                            </div>
+                            <div class="template-item" data-template="neon">
+                                <div class="template-preview neon-template"></div>
+                                <span>Neon 🌈</span>
+                            </div>
+                            <div class="template-item" data-template="couple">
+                                <div class="template-preview couple-template"></div>
+                                <span>Couple 💑</span>
+                            </div>
+                            <div class="template-item" data-template="minimal">
+                                <div class="template-preview minimal-template"></div>
+                                <span>Minimal ✨</span>
+                            </div>
+                            <div class="template-item" data-template="school">
+                                <div class="template-preview school-template"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Editor Section -->
+                <section id="editor-section" class="editor-section hidden">
+                    <div class="editor-container">
+                        <div class="editor-canvas-container">
+                            <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                        </div>
+                        
+                        <div class="editor-sidebar">
+                            <div class="editor-tabs">
+                                <button class="editor-tab active" data-tab="stickers">
+                                    <i class="fas fa-smile"></i>
+                                    <span>Stickers</span>
+                                </button>
+                                <button class="editor-tab" data-tab="text">
+                                    <i class="fas fa-font"></i>
+                                    <span>Text</span>
+                                </button>
+                                <button class="editor-tab" data-tab="filters">
+                                    <i class="fas fa-magic"></i>
+                                    <span>Filters</span>
+                                </button>
+                                <button class="editor-tab" data-tab="frames">
+                                    <i class="fas fa-border-style"></i>
+                                    <span>Frames</span>
+                                </button>
+                            </div>
+
+                            <!-- Stickers Tab -->
+                            <div id="stickers-tab" class="tab-content active">
+                                <h4>Cute Stickers 🌟</h4>
+                                <div class="stickers-grid">
+                                    <div class="sticker-item" data-sticker="heart">💖</div>
+                                    <div class="sticker-item" data-sticker="star">⭐</div>
+                                    <div class="sticker-item" data-sticker="sparkle">✨</div>
+                                    <div class="sticker-item" data-sticker="flower">🌸</div>
+                                    <div class="sticker-item" data-sticker="rainbow">🌈</div>
+                                    <div class="sticker-item" data-sticker="crown">👑</div>
+                                    <div class="sticker-item" data-sticker="butterfly">🦋</div>
+                                    <div class="sticker-item" data-sticker="music">🎵</div>
+                                </div>
+                            </div>
+
+                            <!-- Text Tab -->
+                            <div id="text-tab" class="tab-content hidden">
+                                <h4>Add Text 📝</h4>
+                                <input type="text" id="text-input" placeholder="Enter your text..." class="text-input">
+                                <div class="text-controls">
+                                    <select id="font-select" class="font-select">
+                                        <option value="Nunito">Nunito</option>
+                                        <option value="Comic Sans MS">Comic Sans</option>
+                                        <option value="Arial">Arial</option>
+                                    </select>
+                                    <input type="color" id="text-color" value="#ff69b4" class="color-picker">
+                                    <input type="range" id="text-size" min="12" max="72" value="24" class="size-slider">
+                                </div>
+                                <button id="add-text-btn" class="add-btn">Add Text</button>
+                            </div>
+
+                            <!-- Filters Tab -->
+                            <div id="filters-tab" class="tab-content hidden">
+                                <h4>Aesthetic Filters 🎨</h4>
+                                <div class="filters-grid">
+                                    <div class="filter-item active" data-filter="none">
+                                        <div class="filter-preview"></div>
+                                        <span>Original</span>
+                                    </div>
+                                    <div class="filter-item" data-filter="vintage">
+                                        <div class="filter-preview vintage-filter"></div>
+                                        <span>Vintage</span>
+                                    </div>
+                                    <div class="filter-item" data-filter="dreamy">
+                                        <div class="filter-preview dreamy-filter"></div>
+                                        <span>Dreamy</span>
+                                    </div>
+                                    <div class="filter-item" data-filter="bright">
+                                        <div class="filter-preview bright-filter"></div>
+                                        <span>Bright</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Frames Tab -->
+                            <div id="frames-tab" class="tab-content hidden">
+                                <h4>Photo Frames 🖼️</h4>
+                                <div class="frames-grid">
+                                    <div class="frame-item active" data-frame="none">
+                                        <div class="frame-preview"></div>
+                                        <span>No Frame</span>
+                                    </div>
+                                    <div class="frame-item" data-frame="polaroid">
+                                        <div class="frame-preview polaroid-frame"></div>
+                                        <span>Polaroid</span>
+                                    </div>
+                                    <div class="frame-item" data-frame="rounded">
+                                        <div class="frame-preview rounded-frame"></div>
+                                        <span>Rounded</span>
+                                    </div>
+                                </div>
+                            </div>
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Settings ⚙️</h3>
+                    <button id="close-settings" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label>Camera Quality</label>
+                        <select id="quality-select">
+                            <option value="720p">HD (720p)</option>
+                            <option value="1080p" selected>Full HD (1080p)</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>Auto Capture Timer</label>
+                        <select id="timer-select">
+                            <option value="3">3 seconds</option>
+                            <option value="5" selected>5 seconds</option>
+                            <option value="10">10 seconds</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>Sound Effects</label>
+                        <input type="checkbox" id="sound-toggle" checked>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/test.js"></script>
+</body>
+</html>

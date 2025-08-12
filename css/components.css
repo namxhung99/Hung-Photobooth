@@ -1,0 +1,461 @@
+/* Components CSS for Editor and UI Elements */
+
+/* Editor Section */
+.editor-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.editor-container {
+    display: flex;
+    gap: var(--spacing-xl);
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-medium);
+    min-height: 500px;
+}
+
+.editor-canvas-container {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--soft-gray);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+}
+
+.editor-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-soft);
+}
+
+.editor-sidebar {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Editor Tabs */
+.editor-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--soft-gray);
+    margin-bottom: var(--spacing-md);
+}
+
+.editor-tab {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    background: transparent;
+    color: var(--dark-gray);
+    font-family: var(--font-main);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.editor-tab:hover {
+    background: rgba(255, 105, 180, 0.1);
+    color: var(--primary-pink);
+}
+
+.editor-tab.active {
+    background: var(--gradient-cute);
+    color: white;
+    border-bottom: 2px solid var(--primary-pink);
+}
+
+.editor-tab i {
+    font-size: 1.2rem;
+}
+
+.editor-tab span {
+    font-size: 0.8rem;
+}
+
+/* Tab Content */
+.tab-content {
+    flex: 1;
+    padding: var(--spacing-md) 0;
+}
+
+.tab-content h4 {
+    color: var(--primary-pink);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+/* Stickers Grid */
+.stickers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.sticker-item {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: var(--soft-gray);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.sticker-item:hover {
+    background: var(--gradient-cute);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-soft);
+}
+
+/* Text Controls */
+.text-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--soft-gray);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    transition: border-color 0.3s ease;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: var(--primary-pink);
+}
+
+.text-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.font-select {
+    padding: var(--spacing-sm);
+    border: 2px solid var(--soft-gray);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    background: white;
+}
+
+.color-picker {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+.size-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--radius-sm);
+    background: var(--soft-gray);
+    outline: none;
+    cursor: pointer;
+}
+
+.size-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--gradient-cute);
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+}
+
+.add-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--gradient-cute);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Filters Grid */
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.filter-item {
+    text-align: center;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.filter-item:hover {
+    background: var(--soft-gray);
+    transform: translateY(-2px);
+}
+
+.filter-item.active {
+    border-color: var(--primary-pink);
+    background: rgba(255, 105, 180, 0.1);
+}
+
+.filter-preview {
+    width: 80px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    margin: 0 auto var(--spacing-sm);
+    background: var(--soft-gray);
+}
+
+.filter-item span {
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--dark-gray);
+}
+
+/* Frames Grid */
+.frames-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.frame-item {
+    text-align: center;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.frame-item:hover {
+    background: var(--soft-gray);
+    transform: translateY(-2px);
+}
+
+.frame-item.active {
+    border-color: var(--primary-pink);
+    background: rgba(255, 105, 180, 0.1);
+}
+
+.frame-preview {
+    width: 80px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    margin: 0 auto var(--spacing-sm);
+    background: var(--soft-gray);
+    position: relative;
+}
+
+.frame-item span {
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--dark-gray);
+}
+
+/* Editor Controls */
+.editor-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 0;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-strong);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 2px solid var(--soft-gray);
+    background: var(--gradient-cute);
+    color: white;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-weight: var(--font-weight-bold);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+}
+
+.setting-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.setting-group label {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-sm);
+}
+
+.setting-group select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--soft-gray);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    background: white;
+}
+
+.setting-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-pink);
+}
+
+/* Animations */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive Design for Components */
+@media (max-width: 768px) {
+    .editor-container {
+        flex-direction: column;
+    }
+    
+    .editor-sidebar {
+        min-width: auto;
+    }
+    
+    .editor-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .editor-tab {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+    
+    .editor-tab span {
+        display: none;
+    }
+    
+    .stickers-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .filters-grid,
+    .frames-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .editor-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .control-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .editor-container {
+        padding: var(--spacing-md);
+    }
+    
+    .stickers-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .filters-grid,
+    .frames-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: var(--spacing-md);
+    }
+}

@@ -1,0 +1,76 @@
+.instructions-horizontal {
+    margin: 30px auto;
+    padding: 25px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.instructions-title {
+    text-align: center;
+    color: #FF6B9D;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.instructions-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.instruction-card {
+    flex: 1;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    background: transparent;
+    box-shadow: none;
+}
+
+.instruction-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image-placeholder {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-image-placeholder i {
+    font-size: 2.5rem;
+    color: #FF6B9D;
+}
+
+.card-content .step-number {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 auto 15px auto;
+}
+
+.card-content h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.card-content p {
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
