@@ -1,35 +1,38 @@
 .instructions-horizontal {
-    margin: 30px auto;
-    padding: 25px;
-    background: #f9f9f9;
-    border-radius: 15px;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-lg);
+    background: var(--cream-white);
+    border-radius: var(--radius-lg);
     width: 100%;
     max-width: 1400px;
+    box-shadow: var(--shadow-light);
 }
 
 .instructions-title {
     text-align: center;
-    color: #FF6B9D;
+    color: var(--primary-pink);
     font-size: 1.8rem;
-    margin-bottom: 25px;
-    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-main);
 }
 
 .instructions-container {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .instruction-card {
     flex: 1;
-    border-radius: 15px;
-    padding: 25px;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     text-align: center;
     transition: transform 0.3s ease;
     background: transparent;
-    box-shadow: none;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--soft-pink);
 }
 
 .instruction-card:hover {
@@ -46,31 +49,35 @@
 
 .card-image-placeholder i {
     font-size: 2.5rem;
-    color: #FF6B9D;
+    color: var(--primary-pink);
 }
 
 .card-content .step-number {
-    background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+    background: var(--gradient-cute);
     color: white;
     width: 35px;
     height: 35px;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     font-size: 1rem;
-    margin: 0 auto 15px auto;
+    margin: 0 auto var(--spacing-md) auto;
+    font-family: var(--font-main);
 }
 
 .card-content h3 {
-    color: #333;
-    margin-bottom: 10px;
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-sm);
     font-size: 1.2rem;
+    font-family: var(--font-main);
+    font-weight: var(--font-weight-semibold);
 }
 
 .card-content p {
-    color: #666;
+    color: var(--medium-gray);
     line-height: 1.5;
     font-size: 0.9rem;
+    font-family: var(--font-main);
 }

@@ -54,6 +54,24 @@ class TemplateManager {
                     { type: 'text', content: '🎓', x: 0.1, y: 0.1, size: 30 },
                     { type: 'text', content: '📚', x: 0.9, y: 0.9, size: 30 }
                 ]
+            },
+            koreanBeauty: {
+                name: 'Korean Beauty',
+                description: 'Soft and elegant Korean beauty style',
+                backgroundColor: '#ffc0cb',
+                elements: [
+                    { type: 'text', content: '🌸', x: 0.1, y: 0.1, size: 30 },
+                    { type: 'text', content: '✨', x: 0.9, y: 0.9, size: 30 }
+                ]
+            },
+            softGlamour: {
+                name: 'Soft Glamour',
+                description: 'Delicate makeup and beauty effects',
+                backgroundColor: '#dda0dd',
+                elements: [
+                    { type: 'text', content: '💄', x: 0.1, y: 0.1, size: 30 },
+                    { type: 'text', content: '💋', x: 0.9, y: 0.9, size: 30 }
+                ]
             }
         };
         

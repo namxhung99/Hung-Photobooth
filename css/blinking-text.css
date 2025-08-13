@@ -1,0 +1,94 @@
+/* Blinking Effect for Hùng's Photobooth Text */
+/* Simple and elegant blinking animation */
+
+.welcome-title {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(45deg, #ff69b4, #ff1493, #00bfff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: blinkingText 2s ease-in-out infinite;
+}
+
+/* Main blinking animation */
+@keyframes blinkingText {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.02);
+  }
+}
+
+/* Removed glow effect as requested */
+
+/* Enhanced sparkle effect */
+.welcome-title::after {
+  content: "✨";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 24px;
+  animation: sparkle 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  25%,
+  75% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+
+  .welcome-title::after {
+    font-size: 20px;
+    top: -15px;
+    right: -15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .welcome-title::after {
+    font-size: 16px;
+    top: -10px;
+    right: -10px;
+  }
+}
+
+/* Accessibility - Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-title,
+  .welcome-title::before,
+  .welcome-title::after {
+    animation: none !important;
+  }
+
+  .welcome-title {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

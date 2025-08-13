@@ -365,10 +365,41 @@ class PhotoEditor {
             selectedItem.classList.add('active');
         }
         
-        // For now, we'll just show a notification
-        // In a full implementation, we would apply the frame to the photo
+        // Apply frame to the photo
+        if (this.currentPhoto) {
+            // Remove any existing frame effect
+            this.currentPhoto.set({ stroke: null, strokeWidth: 0, shadow: null });
+            
+            // Apply new frame based on type
+            switch(frameType) {
+                case 'polaroid':
+                    // Add polaroid-style border and shadow
+                    this.currentPhoto.set({ 
+                        stroke: '#ccc', 
+                        strokeWidth: 10,
+                        shadow: '0 5px 15px rgba(0,0,0,0.3)'
+                    });
+                    break;
+                case 'rounded':
+                    // Add rounded corners effect
+                    this.currentPhoto.set({ 
+                        rx: 30, 
+                        ry: 30,
+                        shadow: '0 5px 15px rgba(0,0,0,0.2)'
+                    });
+                    break;
+                case 'none':
+                default:
+                    // No frame effect
+                    this.currentPhoto.set({ stroke: null, strokeWidth: 0, rx: 0, ry: 0, shadow: null });
+                    break;
+            }
+            
+            this.canvas.renderAll();
+        }
+        
         playSound('frame_apply');
-        showNotification(`Frame "${frameType}" selected! 🖼️`, 'success');
+        showNotification(`Frame "${frameType}" applied! 🖼️`, 'success');
     }
     
     savePhoto() {
@@ -393,10 +424,30 @@ class PhotoEditor {
     }
     
     sharePhoto() {
-        // In a real implementation, we would integrate with social media APIs
-        // For now, we'll just show a notification
+        // Check if Web Share API is supported
+        if (navigator.share) {
+            // Convert canvas to blob for sharing
+            this.canvas.lowerCanvasEl.toBlob((blob) => {
+                const file = new File([blob], `hung_photobooth_${getTimestamp()}.png`, { type: 'image/png' });
+                
+                // Share the photo
+                navigator.share({
+                    title: 'My Photobooth Photo',
+                    text: 'Check out my photo from Hùng\'s Photobooth! 📸',
+                    files: [file]
+                }).then(() => {
+                    showNotification('Photo shared successfully! 📱', 'success');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                    showNotification('Failed to share photo 😞', 'error');
+                });
+            }, 'image/png');
+        } else {
+            // Fallback for browsers that don't support Web Share API
+            showNotification('Sharing not supported on this device. Try saving instead! 📱', 'warning');
+        }
+        
         playSound('share');
-        showNotification('Share feature coming soon! 📱', 'info');
     }
     
     switchToCamera() {

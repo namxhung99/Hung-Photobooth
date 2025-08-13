@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/frame-layout.css">
     <link rel="stylesheet" href="css/instructions.css">
+    <link rel="stylesheet" href="css/blinking-text.css">
+    <link rel="stylesheet" href="css/step-timeline.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -82,86 +85,244 @@
 
         <!-- Main App Container -->
         <div id="main-app" class="main-app hidden">
-            <!-- Header -->
-            <header class="app-header">
-                <div class="logo">
-                    <span class="logo-icon">📸</span>
-                    <h1>Hùng's Photobooth</h1>
-                    <span class="subtitle">Korean Style ✨</span>
+            <!-- Cute Header -->
+            <header class="cute-header">
+                <div class="header-left">
+                    <button id="home-btn" class="cute-icon-btn">
+                        <i class="fas fa-home"></i>
+                    </button>
                 </div>
-                <div class="header-controls">
-                    <button id="settings-btn" class="icon-btn">
+                
+                <div class="header-center">
+                    <div class="logo">
+                        <span class="logo-icon">📸</span>
+                        <span class="logo-text">Hùng's Photobooth</span>
+                    </div>
+                    <div class="header-subtitle">
+                        <h2>Korean Style Photo Booth</h2>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button id="settings-btn" class="cute-icon-btn">
                         <i class="fas fa-cog"></i>
                     </button>
                 </div>
             </header>
 
+            <!-- 3-Step Timeline -->
+            <div id="step-timeline" class="step-timeline">
+                <div class="timeline-container">
+                    <div class="step-item active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Chụp ảnh</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Chỉnh sửa</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Lưu & Chia sẻ</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Main Content -->
             <main class="main-content">
-                <!-- Camera Section -->
-                <section id="camera-section" class="camera-section active">
-                    <div class="camera-container">
-                        <div class="camera-frame">
-                            <video id="camera-preview" class="camera-preview" autoplay muted playsinline></video>
-                            <canvas id="camera-canvas" class="camera-canvas hidden"></canvas>
-                            
-                            <!-- Camera Overlay -->
-                            <div class="camera-overlay">
-                                <div id="countdown-display" class="countdown-display hidden">
-                                    <div class="countdown-number">3</div>
-                                    <div class="countdown-text">Get ready! 📸</div>
-                                </div>
-                                
-                                <!-- Template Overlay -->
-                                <div id="template-overlay" class="template-overlay"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- Camera Controls -->
-                        <div class="camera-controls">
-                            <button id="switch-camera-btn" class="control-btn secondary">
-                                <i class="fas fa-sync-alt"></i>
-                                <span>Switch Camera</span>
-                            </button>
-                            
-                            <button id="capture-btn" class="control-btn primary">
+                <!-- Step 1: Camera Section -->
+                <section id="step-1" class="step-section active">
+                    <div class="step-header">
+                        <h2 class="step-title">Bước 1: Chụp ảnh</h2>
+                        <p class="step-description">Chọn số lượng ảnh và bắt đầu chụp</p>
+                    </div>
+                    
+                    <!-- Photo Count Selection -->
+                    <div class="photo-count-selection">
+                        <div class="count-options">
+                            <button class="count-btn active" data-count="1">
                                 <i class="fas fa-camera"></i>
-                                <span>Take Photo</span>
+                                <span>1 ảnh</span>
                             </button>
-                            
-                            <button id="auto-capture-btn" class="control-btn accent">
-                                <i class="fas fa-clock"></i>
-                                <span>Auto Capture</span>
+                            <button class="count-btn" data-count="4">
+                                <i class="fas fa-th-large"></i>
+                                <span>4 ảnh</span>
+                            </button>
+                            <button class="count-btn" data-count="6">
+                                <i class="fas fa-th"></i>
+                                <span>6 ảnh</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Template Selector -->
-                    <div class="template-selector">
-                        <h3>Choose Your Style 🎨</h3>
-                        <div class="template-grid">
-                            <div class="template-item active" data-template="cute">
-                                <div class="template-preview cute-template"></div>
-                                <span>Cute 💕</span>
+                    <!-- Camera Preview Frame -->
+                    <div class="camera-preview-frame">
+                        <video id="step1-camera-preview" class="camera-preview" autoplay muted playsinline></video>
+                        <canvas id="step1-camera-canvas" class="camera-canvas hidden"></canvas>
+                        <div class="camera-overlay hidden" id="step1-template-overlay"></div>
+                        <!-- Frame Selection Button at Top Right -->
+                        <div class="frame-selection-btn">
+                            <button id="select-frame-btn" class="control-btn">
+                                <i class="fas fa-border-all"></i>
+                                <span>Frames</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Style Selection -->
+                    <div class="style-selection">
+                        <h3>Chọn phong cách chụp ảnh</h3>
+                        <div class="style-options">
+                            <button class="style-btn active" data-style="classic">
+                                <span>Bình thường</span>
+                            </button>
+                            <button class="style-btn" data-style="vintage">
+                                <span>Mềm mại</span>
+                            </button>
+                            <button class="style-btn" data-style="modern">
+                                <span>Động quê</span>
+                            </button>
+                            <button class="style-btn" data-style="elegant">
+                                <span>Trắng đen</span>
+                            </button>
+                            <button class="style-btn" data-style="colorful">
+                                <span>Có điện</span>
+                            </button>
+                            <button class="style-btn" data-style="artistic">
+                                <span>Ảnh cưới</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Start Capture Button -->
+                    <div class="capture-start-container">
+                        <button id="start-capture-btn" class="start-capture-btn">
+                            <i class="fas fa-camera"></i>
+                            <span>Bắt đầu chụp</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Camera Capture Section (Hidden initially) -->
+                <section id="camera-section" class="camera-section hidden">
+                    <div class="camera-container">
+                        <!-- Frame Selection Button at Top Right -->
+                        <div class="frame-selection-btn">
+                            <button id="select-frame-btn" class="control-btn">
+                                <i class="fas fa-border-all"></i>
+                                <span>Frames</span>
+                            </button>
+                            <video id="camera-preview" class="camera-preview" autoplay muted playsinline></video>
+                            <canvas id="camera-canvas" class="camera-canvas hidden"></canvas>
+                            <div id="template-overlay" class="template-overlay"></div>
+                            <div id="countdown-display" class="countdown-display hidden">
+                                <div id="countdown-text" class="countdown-text"></div>
                             </div>
-                            <div class="template-item" data-template="retro">
-                                <div class="template-preview retro-template"></div>
-                                <span>Retro 📼</span>
+                        </div>
+                        
+                        <!-- Frame Selection -->
+                        <div class="frame-selection-container">
+                            <h3>Chọn khung ảnh</h3>
+                            <div class="frames-options">
+                                <button class="frame-option active" data-frame="none">
+                                    <div class="frame-preview">
+                                        <span>Không</span>
+                                    </div>
+                                </button>
+                                <button class="frame-option" data-frame="polaroid">
+                                    <div class="frame-preview polaroid-frame">
+                                        <span>Polaroid</span>
+                                    </div>
+                                </button>
+                                <button class="frame-option" data-frame="rounded">
+                                    <div class="frame-preview rounded-frame">
+                                        <span>Bo góc</span>
+                                    </div>
+                                </button>
+                                <button class="frame-option" data-frame="heart">
+                                    <div class="frame-preview heart-frame">
+                                        <span>Tim</span>
+                                    </div>
+                                </button>
+                                <!-- Upload Custom Frame Option -->
+                                <button class="frame-option upload-frame" data-frame="upload">
+                                    <div class="frame-preview">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Tải lên</span>
+                                    </div>
+                                </button>
+                                <input type="file" id="custom-frame-upload" accept=".png" style="display: none;">
                             </div>
-                            <div class="template-item" data-template="neon">
-                                <div class="template-preview neon-template"></div>
-                                <span>Neon 🌈</span>
+                        </div>
+                        
+                        <!-- Layout Selection -->
+                        <div class="layout-selection-container">
+                            <h3>Chọn bố cục</h3>
+                            <div class="layouts-options">
+                                <button class="layout-option active" data-layout="single">
+                                    <div class="layout-preview single-layout">
+                                        <div class="photo"></div>
+                                    </div>
+                                    <span>Đơn</span>
+                                </button>
+                                <button class="layout-option" data-layout="grid">
+                                    <div class="layout-preview grid-layout">
+                                        <div class="photo"></div>
+                                        <div class="photo"></div>
+                                        <div class="photo"></div>
+                                        <div class="photo"></div>
+                                    </div>
+                                    <span>Lưới</span>
+                                </button>
+                                <button class="layout-option" data-layout="collage">
+                                    <div class="layout-preview collage-layout">
+                                        <div class="photo large"></div>
+                                        <div class="photo small"></div>
+                                        <div class="photo small"></div>
+                                        <div class="photo small"></div>
+                                    </div>
+                                    <span>Ghép</span>
+                                </button>
                             </div>
-                            <div class="template-item" data-template="couple">
-                                <div class="template-preview couple-template"></div>
-                                <span>Couple 💑</span>
+                        </div>
+                        
+                        <!-- Filter Selection Row -->
+                        <div class="filter-selection-container">
+                            <h3>Chọn bộ lọc</h3>
+                            <div class="filter-row">
+                                <button class="filter-btn active" data-template="none">Bình thường</button>
+                                <button class="filter-btn" data-template="koreanBeauty">Mềm mại</button>
+                                <button class="filter-btn" data-template="retro">Đồng quê</button>
+                                <button class="filter-btn" data-template="minimal">Trắng đen</button>
+                                <button class="filter-btn" data-template="softGlamour">Có điện</button>
+                                <button class="filter-btn" data-template="cute">Ảnh cũ</button>
                             </div>
-                            <div class="template-item" data-template="minimal">
-                                <div class="template-preview minimal-template"></div>
-                                <span>Minimal ✨</span>
-                            </div>
-                            <div class="template-item" data-template="school">
-                                <div class="template-preview school-template"></div>
+                        </div>
+                        
+                        <!-- Capture Controls -->
+                        <div class="capture-controls">
+                            <button id="switch-camera-btn" class="control-btn">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Đổi camera</span>
+                            </button>
+                            <button id="capture-btn" class="main-capture-btn">
+                                <i class="fas fa-camera"></i>
+                                <span>Chụp ảnh</span>
+                            </button>
+                            <button id="auto-capture-btn" class="control-btn">
+                                <i class="fas fa-clock"></i>
+                                <span>Tự động chụp</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Skin Smoothing Control -->
+                        <div class="skin-smoothing-control">
+                            <label for="skin-smoothing-slider">Làm mịn da</label>
+                            <input type="range" id="skin-smoothing-slider" min="0" max="100" value="0">
                         </div>
                     </div>
                 </section>
@@ -171,8 +332,13 @@
                     <div class="editor-container">
                         <div class="editor-canvas-container">
                             <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                            <!-- Editor Action Buttons -->
+                            <div class="editor-actions">
+                                <button id="back-to-camera-btn" class="secondary-btn">Back to Camera</button>
+                                <button id="save-photo-btn" class="secondary-btn">Save Photo</button>
+                                <button id="share-btn" class="secondary-btn">Share</button>
+                            </div>
                         </div>
-                        
                         <div class="editor-sidebar">
                             <div class="editor-tabs">
                                 <button class="editor-tab active" data-tab="stickers">

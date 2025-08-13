@@ -2,24 +2,26 @@
 
 /* Template Previews */
 .cute-template {
-    background: linear-gradient(135deg, #ffb6c1, #ffd3e0);
+    background: var(--gradient-cute);
     position: relative;
     overflow: hidden;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
 }
 
 .cute-template::before {
     content: "💕";
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
     font-size: 1.5rem;
 }
 
 .cute-template::after {
     content: "💖";
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: var(--spacing-sm);
+    right: var(--spacing-sm);
     font-size: 1.5rem;
 }
 
@@ -49,7 +51,7 @@
     background: linear-gradient(135deg, #00dbde, #fc00ff);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 15px rgba(252, 0, 255, 0.5);
+    box-shadow: var(--shadow-cool);
 }
 
 .neon-template::before {
@@ -115,6 +117,52 @@
     font-size: 1.5rem;
 }
 
+.korean-beauty-template {
+    background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #f5f5f5);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ff69b4;
+}
+
+.korean-beauty-template::before {
+    content: "🌸";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5rem;
+}
+
+.korean-beauty-template::after {
+    content: "✨";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+}
+
+.soft-glamour-template {
+    background: linear-gradient(135deg, #dda0dd, #ffb6c1, #fff0f5);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ff1493;
+}
+
+.soft-glamour-template::before {
+    content: "💄";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5rem;
+}
+
+.soft-glamour-template::after {
+    content: "💋";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+}
+
 /* Filter Previews */
 .vintage-filter {
     background: linear-gradient(135deg, #8e6e5a, #c9a482);
@@ -144,12 +192,12 @@
     width: 40px;
     height: 30px;
     background: #f0f0f0;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
 }
 
 .rounded-frame {
     background: var(--soft-gray);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     position: relative;
 }
 
@@ -161,7 +209,7 @@
     right: 5px;
     bottom: 5px;
     border: 2px solid white;
-    border-radius: 15px;
+    border-radius: var(--radius-lg);
 }
 
 /* Template Overlays */
@@ -276,6 +324,52 @@
     left: 20px;
     font-size: 2rem;
     opacity: 0.7;
+}
+
+/* Korean Beauty Template Overlay */
+.template-overlay.koreanBeauty {
+  background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #f5f5f5);
+  position: relative;
+  overflow: hidden;
+}
+
+.template-overlay.koreanBeauty::before {
+  content: "🌸";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+}
+
+.template-overlay.koreanBeauty::after {
+  content: "✨";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 2rem;
+}
+
+/* Soft Glamour Template Overlay */
+.template-overlay.softGlamour {
+  background: linear-gradient(135deg, #dda0dd, #ffb6c1, #fff0f5);
+  position: relative;
+  overflow: hidden;
+}
+
+.template-overlay.softGlamour::before {
+  content: "💄";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+}
+
+.template-overlay.softGlamour::after {
+  content: "💋";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 2rem;
 }
 
 /* Animations for Themes */
