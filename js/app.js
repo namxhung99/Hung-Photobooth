@@ -91,10 +91,8 @@ class PhotoboothApp {
       });
     });
 
-    // Step 1: Start capture button
-    this.startCaptureBtn.addEventListener("click", () => {
-      this.startPhotoCapture();
-    });
+    // Step 1: Start capture button - Now handled by Step1Manager
+    // Removed conflicting event listener to prevent duplicate capture flows
 
     // Close modal when clicking outside
     this.settingsModal.addEventListener("click", (e) => {
@@ -115,22 +113,30 @@ class PhotoboothApp {
   }
 
   initializeManagers() {
-    // These managers are already initialized in their respective files
-    // We just need to make sure they exist
+    // Initialize camera manager
     if (window.CameraManager) {
-      // Camera manager is initialized in camera.js
+      this.cameraManager = new CameraManager();
+      window.cameraManager = this.cameraManager;
     }
 
+    // Initialize photo editor
     if (window.PhotoEditor) {
       // Photo editor is initialized in editor.js
     }
 
+    // Initialize template manager
     if (window.TemplateManager) {
       this.templateManager = window.templateManager;
     }
 
+    // Initialize filter manager
     if (window.FilterManager) {
       this.filterManager = window.filterManager;
+    }
+
+    // Initialize Step 1 manager
+    if (window.Step1Manager) {
+      this.step1Manager = window.step1Manager;
     }
   }
 
@@ -167,6 +173,14 @@ class PhotoboothApp {
         section.classList.add("hidden");
       }
     });
+
+    // Handle step-specific logic
+    if (stepNumber === 1) {
+      // Ensure camera is started for Step 1 preview
+      if (this.cameraManager && !this.cameraManager.stream) {
+        this.cameraManager.setupCamera();
+      }
+    }
   }
 
   updateTimeline() {
@@ -187,27 +201,27 @@ class PhotoboothApp {
     });
   }
 
-  startPhotoCapture() {
-    console.log(`Starting photo capture: ${this.photoCount} photos, ${this.selectedLayout} layout`);
+  // Method for Step 1 manager to navigate to next step
+  goToStep(stepNumber) {
+    this.showStep(stepNumber);
     
-    // Hide step 1 and show camera section
-    document.getElementById("step-1").classList.add("hidden");
-    document.getElementById("camera-section").classList.remove("hidden");
-
-    // Start camera if not already started
-    if (window.cameraManager && !window.cameraManager.stream) {
-      window.cameraManager.startCamera();
+    // Play transition sound
+    playSound("settings_open");
+    
+    // Show appropriate notification
+    const stepNames = {
+      1: "Chụp ảnh",
+      2: "Chỉnh sửa", 
+      3: "Lưu & Chia sẻ"
+    };
+    
+    if (stepNames[stepNumber]) {
+      showNotification(`Chuyển đến bước ${stepNumber}: ${stepNames[stepNumber]}`, "success");
     }
-
-    // Store selected options for later use
-    if (window.cameraManager) {
-      window.cameraManager.photoCount = this.photoCount;
-      window.cameraManager.selectedLayout = this.selectedLayout;
-    }
-
-    playSound("camera_shutter");
-    showNotification(`Bắt đầu chụp ${this.photoCount} ảnh với bố cục ${this.selectedLayout}!`, "success");
   }
+
+  // Removed startPhotoCapture() method - now handled by Step1Manager
+  // This prevents conflicts between old and new capture flows
 
   openSettings() {
     this.settingsModal.classList.remove("hidden");
@@ -312,6 +326,7 @@ class PhotoboothApp {
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   window.photoboothApp = new PhotoboothApp();
+  window.app = window.photoboothApp; // Make it accessible as window.app for Step 1 manager
 });
 
 // Export PhotoboothApp class

@@ -372,8 +372,8 @@ class PhotoEditor {
             
             // Apply new frame based on type
             switch(frameType) {
-                case 'polaroid':
-                    // Add polaroid-style border and shadow
+                case 'vn':
+                    // Add vn-style border and shadow
                     this.currentPhoto.set({ 
                         stroke: '#ccc', 
                         strokeWidth: 10,

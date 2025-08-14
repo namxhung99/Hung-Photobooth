@@ -1,0 +1,109 @@
+/* Frame styles for Hùng's Photobooth */
+
+.frame-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* VN Frame */
+.vn-frame {
+    background: white;
+    padding: 20px 20px 60px 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transform: rotate(-2deg);
+}
+
+.vn-frame::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 40px;
+    background: white;
+}
+
+/* Rounded Frame */
+.rounded-frame {
+    border: 15px solid white;
+    border-radius: 25px;
+    box-shadow: inset 0 0 0 5px var(--primary-pink), 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Heart Frame */
+.heart-frame {
+    background: linear-gradient(45deg, var(--primary-pink), #ff8fab);
+    padding: 20px;
+    position: relative;
+}
+
+.heart-frame::before {
+    content: '💖';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    z-index: 3;
+}
+
+.heart-frame::after {
+    content: '💖';
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 2rem;
+    z-index: 3;
+}
+
+/* Frame preview styles for buttons */
+.frame-preview {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.frame-preview.vn-frame {
+    background: white;
+    border: 3px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.frame-preview.vn-frame::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 8px;
+    background: white;
+}
+
+.frame-preview.rounded-frame {
+    border: 3px solid white;
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 2px var(--primary-pink);
+}
+
+.frame-preview.heart-frame {
+    background: linear-gradient(45deg, var(--primary-pink), #ff8fab);
+    border: none;
+}
+
+.frame-preview.heart-frame::before {
+    content: '💖';
+    font-size: 1rem;
+}

@@ -1,15 +1,17 @@
-# 📸 Hùng's Photobooth - Korean Style Photo Booth Web App
+# 📸 Hùng's Photobooth - Korean Style Photo Web App
 
 A cute and easy-to-use Korean-style photobooth web application designed for students and teens! Perfect for high school students (14-18 years old) who want to take aesthetic photos with friends. Run it in your browser, take beautiful photos with webcam from PC or mobile devices, and create stunning photobooks with trendy templates, stickers, and effects.
 
 ## ✨ Features
 
 ### 📷 Auto Selfie
+
 - **Countdown Timer**: Automatic photo capture with countdown
 - **Hands-free Experience**: No need to press buttons during photo session
 - **Multiple Shot Modes**: Single shot, burst mode, and timed sequences
 
 ### 🎨 Customization Options
+
 - **Trendy Templates**: Retro, neon, cute, couple, and more Korean-inspired designs perfect for teens
 - **Instagram-worthy Filters**: Multiple aesthetic filters to make your photos social media ready
 - **Teen-friendly Stickers**: Add cute Korean-style stickers, emojis, and trendy decorations
@@ -18,12 +20,14 @@ A cute and easy-to-use Korean-style photobooth web application designed for stud
 - **Flexible Layouts**: Choose from various frame layouts perfect for friend group photos
 
 ### 💾 Save & Share
+
 - **High-Quality Export**: Save photos in high resolution perfect for social media
 - **Photobook Creation**: Create memory books with friends for special occasions
 - **Instant Download**: Quick save to phone or computer
 - **Social Media Ready**: Optimized formats for Instagram, TikTok, and Snapchat stories
 
 ### 📱 Cross-Platform
+
 - **Browser-Based**: Works on Chrome and other modern browsers
 - **PC & Mobile**: Responsive design for desktop and mobile devices
 - **Webcam Support**: Access camera from any device with webcam capability
@@ -31,6 +35,7 @@ A cute and easy-to-use Korean-style photobooth web application designed for stud
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **HTML5/CSS3**: Modern web standards with responsive design
 - **JavaScript (ES6+)**: Interactive functionality and camera controls
 - **Canvas API**: Image manipulation and editing
@@ -38,6 +43,7 @@ A cute and easy-to-use Korean-style photobooth web application designed for stud
 - **CSS Grid/Flexbox**: Responsive layout system
 
 ### Libraries & Tools
+
 - **Fabric.js**: Advanced canvas manipulation for stickers and text
 - **MediaDevices API**: Camera and microphone access
 - **File API**: Image saving and export functionality
@@ -71,6 +77,7 @@ Hung-PhotoBooth/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - Webcam or camera-enabled device
 - Internet connection (for initial load)
@@ -78,16 +85,18 @@ Hung-PhotoBooth/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/namxhung/Hung-PhotoBooth.git
    cd Hung-PhotoBooth
    ```
 
 2. **Open in browser**
+
    ```bash
    # Option 1: Direct file access
    open index.html
-   
+
    # Option 2: Local server (recommended)
    python -m http.server 8000
    # Then visit http://localhost:8000
@@ -108,6 +117,7 @@ Hung-PhotoBooth/
 ## 🎯 Usage
 
 ### Taking Photos
+
 1. Select your preferred template or layout
 2. Click "Start Session" to begin
 3. Position yourself in the camera preview
@@ -115,6 +125,7 @@ Hung-PhotoBooth/
 5. Stay still and smile! 📸
 
 ### Editing Photos
+
 1. After capture, enter edit mode
 2. Add stickers by dragging from the sidebar
 3. Insert text with custom fonts and colors
@@ -122,6 +133,7 @@ Hung-PhotoBooth/
 5. Adjust layout and positioning
 
 ### Saving & Exporting
+
 1. Click "Save Photo" for individual images
 2. Use "Create Photobook" for multiple photos
 3. Choose quality settings (Standard/High/Print)
@@ -130,6 +142,7 @@ Hung-PhotoBooth/
 ## 🎨 Templates & Themes
 
 ### Available Templates
+
 - **Retro**: Y2K and vintage film camera aesthetics popular with Gen Z
 - **Neon**: Bright cyberpunk Korean street vibes perfect for night photos
 - **Cute**: Kawaii-inspired designs with pastels for soft aesthetic photos
@@ -138,6 +151,7 @@ Hung-PhotoBooth/
 - **School**: Fun templates perfect for school events and friend groups
 
 ### Customization Options
+
 - Border styles and colors
 - Background patterns
 - Sticker collections (K-pop, food, animals, emotions)
@@ -146,22 +160,24 @@ Hung-PhotoBooth/
 
 ## 📱 Browser Compatibility
 
-| Browser | Desktop | Mobile | Notes |
-|---------|---------|---------|-------|
-| Chrome | ✅ | ✅ | Recommended |
-| Firefox | ✅ | ✅ | Full support |
-| Safari | ✅ | ✅ | iOS 11+ |
-| Edge | ✅ | ✅ | Chromium-based |
+| Browser | Desktop | Mobile | Notes          |
+| ------- | ------- | ------ | -------------- |
+| Chrome  | ✅      | ✅     | Recommended    |
+| Firefox | ✅      | ✅     | Full support   |
+| Safari  | ✅      | ✅     | iOS 11+        |
+| Edge    | ✅      | ✅     | Chromium-based |
 
 ## 🔧 Configuration
 
 ### Camera Settings
+
 - Resolution: 1920x1080 (adjustable)
 - Frame rate: 30fps
 - Auto-focus: Enabled
 - Flash: Browser dependent
 
 ### Export Settings
+
 - Image format: PNG/JPEG
 - Quality: 85-100% (configurable)
 - Size: Original/Optimized/Print
@@ -177,6 +193,7 @@ We welcome contributions to make this photobooth even more cute and functional!
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow Korean aesthetic design principles
 - Ensure mobile responsiveness
 - Test camera functionality across devices
@@ -197,6 +214,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 If you encounter any issues or have suggestions:
+
 - Create an issue on GitHub
 - Contact: [your-email@example.com]
 - Check browser console for error messages
@@ -205,4 +223,4 @@ If you encounter any issues or have suggestions:
 
 **Made with ❤️ for creating beautiful memories!**
 
-*Enjoy your Korean-style photobooth experience! 📸✨*
+_Enjoy your Korean-style photobooth experience! 📸✨_

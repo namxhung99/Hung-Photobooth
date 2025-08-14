@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/blinking-text.css">
     <link rel="stylesheet" href="css/step-timeline.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/step1.css">
+    <link rel="stylesheet" href="css/frames.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -99,7 +101,7 @@
                         <span class="logo-text">Hùng's Photobooth</span>
                     </div>
                     <div class="header-subtitle">
-                        <h2>Korean Style Photo Booth</h2>
+                        <h2>Korean Style Photo </h2>
                     </div>
                 </div>
                 
@@ -134,76 +136,190 @@
             <main class="main-content">
                 <!-- Step 1: Camera Section -->
                 <section id="step-1" class="step-section active">
-                    <div class="step-header">
-                        <h2 class="step-title">Bước 1: Chụp ảnh</h2>
-                        <p class="step-description">Chọn số lượng ảnh và bắt đầu chụp</p>
-                    </div>
-                    
-                    <!-- Photo Count Selection -->
-                    <div class="photo-count-selection">
-                        <div class="count-options">
-                            <button class="count-btn active" data-count="1">
-                                <i class="fas fa-camera"></i>
-                                <span>1 ảnh</span>
-                            </button>
-                            <button class="count-btn" data-count="4">
-                                <i class="fas fa-th-large"></i>
-                                <span>4 ảnh</span>
-                            </button>
-                            <button class="count-btn" data-count="6">
-                                <i class="fas fa-th"></i>
-                                <span>6 ảnh</span>
-                            </button>
+                    <div class="step-1-container">
+                        <!-- Left Side: Controls -->
+                        <div class="step-1-left">
+                            <div class="step-header">
+                                <h2 class="step-title">Bước 1: Chụp ảnh</h2>
+                                <p class="step-description">Tùy chỉnh và chụp ảnh của bạn</p>
+                            </div>
+                            
+                            <!-- Photo Count Dropdown -->
+                            <div class="photo-count-selection">
+                                <label for="photo-count-dropdown">Số lượng ảnh:</label>
+                                <select id="photo-count-dropdown" class="dropdown-select">
+                                    <option value="1" selected>1 ảnh</option>
+                                    <option value="4">4 ảnh</option>
+                                    <option value="6">6 ảnh</option>
+                                </select>
+                            </div>
+
+                            <!-- Capture Delay Selection -->
+                            <div class="delay-selection">
+                                <label for="delay-dropdown">⏱️ Thời gian đếm ngược:</label>
+                                <select id="delay-dropdown" class="dropdown-select">
+                                    <option value="3" selected>3 giây</option>
+                                    <option value="5">5 giây</option>
+                                </select>
+                            </div>
+
+                            <!-- Frame Selection -->
+                            <div class="frame-selection">
+                                <label for="frame-dropdown">🖼️ Khung ảnh:</label>
+                                <select id="frame-dropdown" class="dropdown-select">
+                                    <option value="none" selected>Không khung</option>
+                                    <optgroup label="Khung cơ bản">
+                                        <option value="vn">🇻🇳 Tự hào VN</option>
+                                        <option value="rounded">💙 VNPT 80 Năm</option>
+                                        <option value="heart">💖 Hình tim</option>
+                                        <option value="circle">🔵 Hình tròn</option>
+                                        <option value="vintage">🎨 Phong cách vintage</option>
+                                    </optgroup>
+                                    <optgroup label="Phong cách Hàn Quốc">
+                                        <option value="kawaii">🎀 Kawaii</option>
+                                        <option value="pastel">🌈 Pastel</option>
+                                        <option value="cherry-blossom">🌸 Hoa anh đào</option>
+                                        <option value="cute-border">💕 Viền cute</option>
+                                        <option value="korean-traditional">🏮 Truyền thống</option>
+                                    </optgroup>
+                                    <option value="custom">📁 Tải khung tùy chỉnh</option>
+                                </select>
+                                <input type="file" id="custom-frame-upload" accept=".png,.jpg,.jpeg" style="display: none;">
+                                <button id="upload-frame-btn" class="upload-btn hidden">
+                                    🌟 Tải lên khung
+                                </button>
+                            </div>
+
+                            <!-- Style Selection -->
+                            <div class="style-selection">
+                                <label>Phong cách chụp ảnh:</label>
+                                <div class="style-options">
+                                    <button class="style-btn active" data-style="none">
+                                        <span>Bình thường</span>
+                                    </button>
+                                    <button class="style-btn" data-style="vintage">
+                                        <span>Mềm mại</span>
+                                    </button>
+                                    <button class="style-btn" data-style="retro">
+                                        <span>Đồng quê</span>
+                                    </button>
+                                    <button class="style-btn" data-style="minimal">
+                                        <span>Trắng đen</span>
+                                    </button>
+                                    <button class="style-btn" data-style="bright">
+                                        <span>Sáng</span>
+                                    </button>
+                                    <button class="style-btn" data-style="dreamy">
+                                        <span>Mơ màng</span>
+                                    </button>
+                                    <button class="style-btn" data-style="kawaii">
+                                        <span>Kawaii</span>
+                                    </button>
+                                    <button class="style-btn" data-style="pastel">
+                                        <span>Pastel</span>
+                                    </button>
+                                    <button class="style-btn" data-style="film">
+                                        <span>Film</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Skin Tone Slider -->
+                            <div class="skin-tone-selection">
+                                <label for="skin-tone-slider">Làm mịn da:</label>
+                                <div class="slider-container">
+                                    <span class="slider-label">Tối</span>
+                                    <input type="range" id="skin-tone-slider" class="slider" min="-50" max="50" value="0">
+                                    <span class="slider-label">Sáng</span>
+                                </div>
+                                <div class="slider-value" id="skin-tone-value">0</div>
+                            </div>
+
                         </div>
-                    </div>
 
-                    <!-- Camera Preview Frame -->
-                    <div class="camera-preview-frame">
-                        <video id="step1-camera-preview" class="camera-preview" autoplay muted playsinline></video>
-                        <canvas id="step1-camera-canvas" class="camera-canvas hidden"></canvas>
-                        <div class="camera-overlay hidden" id="step1-template-overlay"></div>
-                        <!-- Frame Selection Button at Top Right -->
-                        <div class="frame-selection-btn">
-                            <button id="select-frame-btn" class="control-btn">
-                                <i class="fas fa-border-all"></i>
-                                <span>Frames</span>
-                            </button>
+                        <!-- Center: Camera Preview -->
+                        <div class="step-1-center">
+                            <!-- Camera Controls Outside Preview -->
+                            <div class="camera-external-controls">
+                                <button id="switch-camera-btn" class="flip-camera-btn" title="Lật camera">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>Lật camera</span>
+                                </button>
+                            </div>
+                            
+                            <!-- Left Pose - Independent Element -->
+                            <div class="pose-item left-pose" data-pose="cute">
+                                <div class="large-decorative-frame vn-style">
+                                    <img src="assets/posing/posing_idea.jpeg" alt="Dễ thương" class="large-pose-img" 
+                                         onerror="this.parentElement.classList.add('fallback-mode')">
+                                    <div class="large-pose-fallback">
+                                        <span class="large-fallback-icon">😊</span>
+                                    </div>
+                                    <div class="large-vn-label">🇻🇳 Tự hào Việt Nam</div>
+                                </div>
+                            </div>
+
+                            <!-- Camera Preview Frame - Center -->
+                            <div class="camera-preview-frame">
+                                <video id="step1-camera-preview" autoplay muted playsinline></video>
+                                <canvas id="step1-camera-canvas" style="display: none;"></canvas>
+                                
+                                <!-- Frame Overlay -->
+                                <div id="step1-frame-overlay" class="frame-overlay"></div>
+                                
+                                <!-- Style Overlay -->
+                                <div id="step1-style-overlay" class="style-overlay"></div>
+                                
+                                <!-- Countdown Overlay -->
+                                <div id="step1-countdown-overlay" class="countdown-overlay" style="display: none;">
+                                    <div class="countdown-content">
+                                        <div class="countdown-number">3</div>
+                                        <div class="countdown-text">Chuẩn bị...</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Capture Button Container -->
+                            <div class="capture-button-container">
+                                <button id="start-capture-btn" class="start-capture-btn">
+                                    <i class="fas fa-camera"></i>
+                                    Chụp hình
+                                </button>
+                            </div>
+
+                            <!-- Right Pose - Independent Element -->
+                            <div class="pose-item right-pose" data-pose="lovely">
+                                <div class="large-decorative-frame korean-style">
+                                    <img src="assets/posing/posing2.jpg" alt="Yêu kiều" class="large-pose-img" 
+                                         onerror="this.parentElement.classList.add('fallback-mode')">
+                                    <div class="large-pose-fallback">
+                                        <span class="large-fallback-icon">💕</span>
+                                    </div>
+                                    <div class="large-korean-label">Yêu kiều 💖</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Style Selection -->
-                    <div class="style-selection">
-                        <h3>Chọn phong cách chụp ảnh</h3>
-                        <div class="style-options">
-                            <button class="style-btn active" data-style="classic">
-                                <span>Bình thường</span>
-                            </button>
-                            <button class="style-btn" data-style="vintage">
-                                <span>Mềm mại</span>
-                            </button>
-                            <button class="style-btn" data-style="modern">
-                                <span>Động quê</span>
-                            </button>
-                            <button class="style-btn" data-style="elegant">
-                                <span>Trắng đen</span>
-                            </button>
-                            <button class="style-btn" data-style="colorful">
-                                <span>Có điện</span>
-                            </button>
-                            <button class="style-btn" data-style="artistic">
-                                <span>Ảnh cưới</span>
-                            </button>
+                        <!-- Right Side: Captured Photos -->
+                        <div class="step-1-right">
+                            <div class="captured-photos-container">
+                                <h3>Ảnh đã chụp</h3>
+                                <div id="captured-photos-grid" class="captured-photos-grid">
+                                    <div class="no-photos-message">
+                                        <i class="fas fa-camera"></i>
+                                        <p>Chưa có ảnh nào</p>
+                                    </div>
+                                </div>
+                                <div class="photo-actions hidden" id="photo-actions">
+                                    <button id="retake-photos-btn" class="action-btn secondary">
+                                        <i class="fas fa-redo"></i> Chụp lại
+                                    </button>
+                                    <button id="continue-to-edit-btn" class="action-btn primary">
+                                        <i class="fas fa-arrow-right"></i> Tiếp tục
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-
-
-                    <!-- Start Capture Button -->
-                    <div class="capture-start-container">
-                        <button id="start-capture-btn" class="start-capture-btn">
-                            <i class="fas fa-camera"></i>
-                            <span>Bắt đầu chụp</span>
-                        </button>
                     </div>
                 </section>
 
@@ -233,9 +349,9 @@
                                         <span>Không</span>
                                     </div>
                                 </button>
-                                <button class="frame-option" data-frame="polaroid">
-                                    <div class="frame-preview polaroid-frame">
-                                        <span>Polaroid</span>
+                                <button class="frame-option" data-frame="vn">
+                                    <div class="frame-preview vn-frame">
+                                        <span>Tự hào VN</span>
                                     </div>
                                 </button>
                                 <button class="frame-option" data-frame="rounded">
@@ -246,6 +362,11 @@
                                 <button class="frame-option" data-frame="heart">
                                     <div class="frame-preview heart-frame">
                                         <span>Tim</span>
+                                    </div>
+                                </button>
+                                <button class="frame-option" data-frame="vn">
+                                    <div class="frame-preview">
+                                        <span>Tự hào VN</span>
                                     </div>
                                 </button>
                                 <!-- Upload Custom Frame Option -->
@@ -421,9 +542,9 @@
                                         <div class="frame-preview"></div>
                                         <span>No Frame</span>
                                     </div>
-                                    <div class="frame-item" data-frame="polaroid">
-                                        <div class="frame-preview polaroid-frame"></div>
-                                        <span>Polaroid</span>
+                                    <div class="frame-item" data-frame="vn">
+                                        <div class="frame-preview vn-frame"></div>
+                                        <span>Tự hào VN</span>
                                     </div>
                                     <div class="frame-item" data-frame="rounded">
                                         <div class="frame-preview rounded-frame"></div>
@@ -469,6 +590,7 @@
     <script src="js/editor.js"></script>
     <script src="js/templates.js"></script>
     <script src="js/filters.js"></script>
+    <script src="js/step1-manager.js"></script>
     <script src="js/app.js"></script>
     <script src="js/test.js"></script>
 </body>

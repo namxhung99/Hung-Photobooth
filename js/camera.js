@@ -360,21 +360,48 @@ class CameraManager {
   }
 
   async switchCamera() {
-    if (this.cameras.length <= 1) {
-      showNotification("No other cameras available", "info");
-      return;
+    // If multiple cameras available, switch between them
+    if (this.cameras.length > 1) {
+      // Cycle to next camera
+      const nextCameraIndex = (this.currentCamera + 1) % this.cameras.length;
+
+      // Start new camera
+      await this.startCamera(nextCameraIndex);
+
+      // Show notification
+      const cameraLabel =
+        this.cameras[nextCameraIndex].label || `Camera ${nextCameraIndex + 1}`;
+      showNotification(`Switched to ${cameraLabel}`, "info");
+    } else {
+      // If only one camera, flip/mirror the video instead
+      this.flipCamera();
     }
+  }
 
-    // Cycle to next camera
-    const nextCameraIndex = (this.currentCamera + 1) % this.cameras.length;
-
-    // Start new camera
-    await this.startCamera(nextCameraIndex);
-
-    // Show notification
-    const cameraLabel =
-      this.cameras[nextCameraIndex].label || `Camera ${nextCameraIndex + 1}`;
-    showNotification(`Switched to ${cameraLabel}`, "info");
+  flipCamera() {
+    // Toggle the flip state
+    const isFlipped = this.video.style.transform.includes('scaleX(-1)');
+    
+    if (isFlipped) {
+      // Remove flip
+      this.video.style.transform = this.video.style.transform.replace('scaleX(-1)', 'scaleX(1)');
+      if (this.step1Video) {
+        this.step1Video.style.transform = this.step1Video.style.transform.replace('scaleX(-1)', 'scaleX(1)');
+      }
+      showNotification("Camera unflipped", "info");
+    } else {
+      // Apply flip
+      const currentTransform = this.video.style.transform || '';
+      this.video.style.transform = currentTransform + ' scaleX(-1)';
+      if (this.step1Video) {
+        const currentStep1Transform = this.step1Video.style.transform || '';
+        this.step1Video.style.transform = currentStep1Transform + ' scaleX(-1)';
+      }
+      showNotification("Camera flipped", "info");
+    }
+    
+    // Play sound effect
+    playSound("camera_on");
   }
 
   selectTemplate(templateName) {
