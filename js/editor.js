@@ -16,18 +16,20 @@ class PhotoEditor {
         this.editorTabs = document.querySelectorAll('.editor-tab');
         this.tabContents = document.querySelectorAll('.tab-content');
         
-        this.init();
+        this.initializeCanvas();
+        this.setupEventListeners();
     }
     
-    init() {
-        // Setup canvas
-        this.setupCanvas();
+    initializeCanvas() {
+        const canvasElement = document.getElementById('editor-canvas');
+        this.canvas = new fabric.Canvas(canvasElement, {
+            width: 600,
+            height: 400,
+            backgroundColor: '#fff'
+        });
         
-        // Setup event listeners
-        this.setupEventListeners();
-        
-        // Load the captured photo
-        this.loadCapturedPhoto();
+        // Load captured photos
+        this.loadCapturedPhotos();
     }
     
     setupCanvas() {
@@ -94,7 +96,7 @@ class PhotoEditor {
             this.addText();
         });
         
-        // Editor tabs
+        // Tab switching
         this.editorTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 this.switchTab(tab.dataset.tab);
@@ -116,34 +118,135 @@ class PhotoEditor {
                 this.applyFrame(item.dataset.frame);
             });
         });
+        
+        // Photo navigation
+        const prevBtn = document.getElementById('prev-photo-btn');
+        const nextBtn = document.getElementById('next-photo-btn');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                this.showPreviousPhoto();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                this.showNextPhoto();
+            });
+        }
     }
     
-    loadCapturedPhoto() {
-        // Get the captured photo from camera canvas
-        const cameraCanvas = document.getElementById('camera-canvas');
-        if (cameraCanvas && cameraCanvas.width > 0 && cameraCanvas.height > 0) {
-            const imageData = cameraCanvas.toDataURL('image/png');
+    loadCapturedPhotos() {
+        // Get the captured photos data from Step 1
+        const capturedData = window.capturedPhotosData;
+        
+        if (capturedData && capturedData.photos && capturedData.photos.length > 0) {
+            this.capturedPhotos = capturedData.photos;
+            this.currentPhotoIndex = 0;
             
-            // Add photo to editor canvas
-            fabric.Image.fromURL(imageData, (img) => {
-                // Scale image to fit canvas
-                const scale = Math.min(
-                    this.canvas.getWidth() / img.width,
-                    this.canvas.getHeight() / img.height
-                );
+            // Load the first photo
+            this.loadPhotoAtIndex(0);
+            
+            // Show navigation if multiple photos
+            if (this.capturedPhotos.length > 1) {
+                const photoNav = document.getElementById('photo-navigation');
+                const photoCounter = document.getElementById('photo-counter');
+                photoNav.classList.remove('hidden');
+                photoCounter.textContent = `${this.currentPhotoIndex + 1}/${this.capturedPhotos.length}`;
+            }
+        } else {
+            // Fallback to camera canvas if no captured data
+            const cameraCanvas = document.getElementById('camera-canvas');
+            if (cameraCanvas && cameraCanvas.width > 0 && cameraCanvas.height > 0) {
+                const imageData = cameraCanvas.toDataURL('image/png');
+                this.capturedPhotos = [imageData];
+                this.currentPhotoIndex = 0;
                 
-                img.scale(scale);
-                img.set({
-                    left: this.canvas.getWidth() / 2,
-                    top: this.canvas.getHeight() / 2,
-                    originX: 'center',
-                    originY: 'center'
+                // Add photo to editor canvas
+                fabric.Image.fromURL(imageData, (img) => {
+                    // Scale image to fit canvas
+                    const scale = Math.min(
+                        this.canvas.getWidth() / img.width,
+                        this.canvas.getHeight() / img.height
+                    );
+                    
+                    img.scale(scale);
+                    img.set({
+                        left: this.canvas.getWidth() / 2,
+                        top: this.canvas.getHeight() / 2,
+                        originX: 'center',
+                        originY: 'center'
+                    });
+                    
+                    this.canvas.add(img);
+                    this.canvas.renderAll();
+                    this.currentPhoto = img;
                 });
-                
-                this.canvas.add(img);
-                this.canvas.renderAll();
-                this.currentPhoto = img;
+            }
+        }
+    }
+    
+    loadPhotoAtIndex(index) {
+        // Clear canvas
+        this.canvas.clear();
+        
+        // Load photo at specified index
+        const imageData = this.capturedPhotos[index];
+        fabric.Image.fromURL(imageData, (img) => {
+            // Scale image to fit canvas
+            const scale = Math.min(
+                this.canvas.getWidth() / img.width,
+                this.canvas.getHeight() / img.height
+            );
+            
+            img.scale(scale);
+            img.set({
+                left: this.canvas.getWidth() / 2,
+                top: this.canvas.getHeight() / 2,
+                originX: 'center',
+                originY: 'center'
             });
+            
+            this.canvas.add(img);
+            this.canvas.renderAll();
+            this.currentPhoto = img;
+            this.currentPhotoIndex = index;
+            
+            // Apply frame, style, and skin settings from Step 1
+            const capturedData = window.capturedPhotosData;
+            if (capturedData) {
+                if (capturedData.frame && capturedData.frame !== 'none') {
+                    this.applyFrame(capturedData.frame);
+                }
+                
+                if (capturedData.style && capturedData.style !== 'none') {
+                    this.applyFilter(capturedData.style);
+                }
+                
+                // Skin tone adjustment would need to be implemented as a filter
+                // For now, we'll just show a notification if it was selected
+                if (capturedData.skinTone && capturedData.skinTone !== 'none') {
+                    showNotification(`Skin smoothing applied: ${capturedData.skinTone}`, 'info');
+                }
+            }
+            
+            // Update photo counter
+            const photoCounter = document.getElementById('photo-counter');
+            if (photoCounter) {
+                photoCounter.textContent = `${this.currentPhotoIndex + 1}/${this.capturedPhotos.length}`;
+            }
+        });
+    }
+    
+    showPreviousPhoto() {
+        if (this.currentPhotoIndex > 0) {
+            this.loadPhotoAtIndex(this.currentPhotoIndex - 1);
+        }
+    }
+    
+    showNextPhoto() {
+        if (this.currentPhotoIndex < this.capturedPhotos.length - 1) {
+            this.loadPhotoAtIndex(this.currentPhotoIndex + 1);
         }
     }
     
